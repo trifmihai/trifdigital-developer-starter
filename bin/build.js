@@ -54,8 +54,8 @@ function logServedFiles() {
    * @param {string} dirPath
    * @returns {string[]} An array of file paths.
    */
-  const getFiles = (dirPath) => {
-    const files = readdirSync(dirPath, { withFileTypes: true }).map((dirent) => {
+  const getFiles = dirPath => {
+    const files = readdirSync(dirPath, { withFileTypes: true }).map(dirent => {
       const path = join(dirPath, dirent.name);
       return dirent.isDirectory() ? getFiles(path) : path;
     });
@@ -66,7 +66,7 @@ function logServedFiles() {
   const files = getFiles(BUILD_DIRECTORY);
 
   const filesInfo = files
-    .map((file) => {
+    .map(file => {
       if (file.endsWith('.map')) return;
 
       // Normalize path and create file location
