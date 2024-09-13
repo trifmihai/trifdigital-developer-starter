@@ -1,0 +1,238 @@
+/* ================== */
+/* ? MEDIA QUERIES */
+/* ================== */
+
+html {
+  font-size: calc(0.5rem + 0.41666666666666663vw);
+}
+@media screen and (max-width: 1920px) {
+  html {
+    font-size: calc(0.49999999999999994rem + 0.41666666666666674vw);
+  }
+}
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
+  }
+}
+@media screen and (max-width: 479px) {
+  html {
+    font-size: calc(0.8747384937238494rem + 0.41841004184100417vw);
+  }
+}
+
+@media (max-width: 1110px) {
+  .plan_grid-v2 > .plan-lines-center > .plan-lines_center-line:nth-child(2),
+  .plan_grid-v2 > .plan-lines_center > .plan-lines_center-line:nth-child(3),
+  .plan_grid-v2 > .plan-lines_center > .plan-lines_center-line:nth-child(4) {
+    display: none;
+  }
+}
+
+/* ! to check later */
+.section_hero,
+.section_cta,
+.plan_grid-v2.is-right,
+.plan_grid-v2.is-left {
+  display: none;
+}
+
+@media (max-width: 911px) {
+  .section_hero > .padding-global > .container-large.projects {
+    display: none;
+  }
+
+  .section_hero.hide-desktop {
+    display: block;
+  }
+
+  /* ================== */
+  /* ? PRICING SLIDER */
+  /* ================== */
+
+  .section_pricing > .padding-global:last-child {
+    padding: 0;
+  }
+
+  .slide,
+  .pricing_slide {
+    cursor: grab;
+  }
+  .slide:active,
+  .pricing_slide:active {
+    cursor: grabbing;
+  }
+
+  .slider-wrapper {
+    width: 100%;
+    padding: 0 2rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pricing_content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 100%;
+  }
+
+  .pricing_slider {
+    display: flex;
+    gap: 2rem; /* 1rem gap between slides */
+  }
+
+  .pricing_slide {
+    flex: 0 0 90%; /* Each slide takes up 100% of the parent container */
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--neutral--700);
+    border-radius: 16px;
+
+    display: flex;
+    align-items: flex-start;
+
+    overflow-wrap: break-word; /* Ensure text breaks within the container */
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .pricing_slider .pricing_slide:last-child {
+    flex: 0 0 100%;
+
+    overflow-wrap: break-word; /* Ensure text breaks within the container */
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 768px) {
+  .form_component {
+    padding: 4rem 2rem;
+  }
+  /* BENEFITS */
+
+  .benefits-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, min-content);
+    justify-content: center;
+    align-content: center;
+    place-items: unset;
+  }
+
+  .is-track-top,
+  .is-track-bottom {
+    display: flex;
+    /* flex: 1 0 100%; */
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .is-track-top {
+    grid-row: 1/2;
+  }
+
+  .text-size-large.is-powerhouse-text {
+    border: 1px solid var(--neutral--700);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    background-color: #0c0d0d;
+  }
+
+  .benefit_powerhouse {
+    grid-row: 2/3;
+    border: unset;
+    padding: 0;
+    padding: 2rem;
+    background-color: transparent;
+    place-content: center center;
+  }
+
+  /* ! to check later */
+  .benefit_lines {
+    height: 100%;
+    width: 100%;
+  }
+
+  .is-track-bottom {
+    grid-row: 3/4;
+  }
+
+  /* PROOF */
+  .proof-project_content {
+    grid-template-rows: repeat(4, min-content);
+    grid-template-columns: 1fr;
+  }
+
+  .proof-project_website {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+  }
+
+  .proof-project_results {
+    grid-column: 1/-1;
+    grid-row: 2/3;
+    height: 100%;
+
+    align-content: center;
+    z-index: 99;
+  }
+
+  .proof-card.proof-project_review {
+    grid-column: 1/-1;
+    grid-row: 3/4;
+    height: 100%;
+
+    flex-wrap: unset;
+    align-items: flex-start;
+
+    /* align-items: center;
+      text-align: center; */
+  }
+
+  .proof-project_features {
+    grid-column: 1/-1;
+    grid-row: 4/5;
+
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* FAQ */
+  .contact-me_wrapper {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+  }
+
+  .contact-me_question-wrapper {
+    justify-content: flex-start;
+  }
+
+  .contact-me_wrapper > .contact-me_card:last-of-type {
+    align-items: center;
+  }
+
+  /* FOOTER */
+  .footer_content-wrapper {
+    grid-template-rows: repeat(3, min-content);
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: 3rem;
+  }
+
+  .footer_card-spots {
+    grid-row: 1/2;
+    grid-column: 1/-1;
+  }
+
+  .footer_socials-wrapper {
+    grid-row: 2/3;
+    grid-column: 1/-1;
+  }
+
+  .footer_copyright-wrapper {
+    grid-row: 3/4;
+    grid-column: 1/-1;
+    display: flex; /* Add flexbox */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+  }
+}

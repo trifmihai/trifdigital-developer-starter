@@ -1,0 +1,119 @@
+/* ================== */
+/* ? HERO MOBILE */
+/* ================== */
+
+.slider-wrapper {
+  width: 100%;
+  padding: 0 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider {
+  display: flex;
+  gap: 1rem; /* 1rem gap between slides */
+}
+
+.slide {
+  flex: 0 0 90%; /* Each slide takes up 100% of the parent container */
+  padding: 1rem;
+  border: 1px solid var(--neutral--700);
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+}
+
+.slider .slide:last-child {
+  flex: 0 0 100%;
+}
+
+/* ?Documentation - this needs to exist to ensure that the content inside the last slide is matching the other slides */
+.slider .slide:last-child .hero-mobile_content {
+  max-width: 90%; /* Constrain the content inside the last slide */
+  margin: 0 auto; /* Center the content inside the last slide */
+}
+
+.hero-mobile_content {
+  display: grid;
+  grid-template-rows: repeat(3, min-content);
+  grid-template-columns: repeat(9, 1fr);
+  pointer-events: none;
+
+  /* !New */
+  align-content: center;
+  height: 100%;
+  width: 100%; /* Ensure the content takes the full width of the slide */
+}
+
+.hero-mobile_slide.hero-mobile_content {
+  align-content: center;
+  height: 100%;
+}
+
+.hero-mobile-website_project-part-1-1,
+.hero-mobile-website_project-part-1-2,
+.hero-mobile-website_project-part-1-3,
+.hero-mobile-website_project-part-2-1 {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.hero-mobile-website_project-part-1-1 {
+  grid-row: 1 / 2;
+  grid-column: 1 / 6;
+  z-index: 99;
+}
+
+.hero-mobile-website_project-part-1-2 {
+  grid-row: 2 / 3;
+  grid-column: 1 / 6;
+  z-index: 99;
+}
+
+.hero-mobile-website_project-part-1-3 {
+  grid-row: 3 / 4;
+  grid-column: 1 / 6;
+  z-index: 99;
+}
+
+.hero-mobile-website_project-part-1--shadow {
+  grid-row: 1 / -1;
+  grid-column: 1 / 6;
+  border-radius: 8px;
+  z-index: 9;
+  box-shadow:
+    0px 50px 100px -20px rgba(16, 17, 17, 25%),
+    0px 30px 60px -30px rgba(16, 17, 17, 30%);
+}
+
+.hero-mobile-website_project-part-2-1 {
+  grid-row: 2 / 3;
+  grid-column: 5 / 10;
+  z-index: 9;
+
+  position: relative;
+}
+
+.hero-mobile-website_project-part-2-1 img {
+  border-radius: 8px;
+  width: 100%;
+}
+
+.hero-mobile-website_project-part-2-1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
+  background: linear-gradient(
+    to left,
+    rgba(16, 17, 17, 0.5) 0%,
+    rgba(16, 17, 17, 0.35) 20%,
+    rgba(16, 17, 17, 0) 50%
+  );
+  pointer-events: none; /* Ensure the pseudo-element does not interfere with interactions */
+}

@@ -1,0 +1,24 @@
+/* ================== */
+/* ? SECTION PRICING */
+/* ================== */
+
+.button.is-primary {
+  justify-content: center;
+}
+
+.pricing_slider {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  column-gap: 1.5rem;
+}
+
+.pricing_slide {
+  padding: 2.5rem 2rem;
+  background-color: var(--color--background--primary-light-1);
+  border-radius: 8px;
+}
+
+.pricing_slide.is-premium {
+  border: 1px solid var(--neutral--700);
+}
