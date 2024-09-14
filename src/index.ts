@@ -1,23 +1,32 @@
 'use strict';
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import './style.css';
 import './section_pricing.css';
 import './section_hero.css';
 import './mediaQueries.css';
 
+import Swiper from 'swiper';
+
 // import { initializeSlider } from '$scripts/slider';
 import { greetUser } from '$utils/greet';
-// import { DotLottie } from '@lottiefiles/dotlottie-web';
 
-// const dotLottie = new DotLottie({
-//   autoplay: true,
-//   loop: true,
-//   canvas: document.querySelector('#dotlottie-canvas') as HTMLCanvasElement,
-//   src: 'https://lottie.host/f3ae5ed6-72be-493b-84b7-9b6232382cd1/24R26hxILQ.json', // Adjusted path
-// });
+// Initialize Swiper
+const swiper = new Swiper('.swiper', {
+  enabled: true, // Swiper is enabled by default
 
-// Example usage to avoid the error
-// dotLottie.play();
+  breakpoints: {
+    // When the window width is >= 768px
+    911: {
+      enabled: false, // Disable Swiper for screens 768px and up
+    },
+  },
+  slidesPerView: 'auto',
+  spaceBetween: 16,
+  grabCursor: true,
+});
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -50,8 +59,6 @@ stakesCards.forEach(card => {
     cardElement.style.borderColor = ''; // Reset border color
   });
 });
-
-// FORM
 
 // Style the parent element of the checked radio
 document.querySelectorAll('.form-radio input[type="radio"]').forEach(radio => {
@@ -107,7 +114,7 @@ document.querySelectorAll('.accordion-item').forEach(item => {
 
 function setupMaskHover() {
   const maskedElements = document.querySelectorAll(
-    '.container-large.radial-gradient, .container-large.cta_radial-gradient, .container-large.radial-gradient-projects'
+    '.container-large.radial-gradient, .container-large.cta_radial_gradient, .container-large.radial-gradient-projects'
   );
 
   maskedElements.forEach(element => {
@@ -386,26 +393,3 @@ function initializeSlider(options = {}) {
   // Initialize the slider
   init();
 }
-
-// Initialize the slider
-initializeSlider({
-  slideSelector: '.slide',
-  sliderSelector: '.slider',
-  mediaQuery: null, // Optional media query
-  transitionSpeed: 0.5, // In seconds
-  dragThreshold: 0.25, // Fraction of viewport width
-  adjustLastSlide: false, // No need to adjust the last slide
-  baseFontSize: 16, // For rem conversion
-  // No need to specify 'gap' here since it's read from CSS
-});
-
-initializeSlider({
-  slideSelector: '.pricing_slide',
-  sliderSelector: '.pricing_slider',
-  mediaQuery: '(max-width: 911px)', // Optional media query
-  transitionSpeed: 0.5, // In seconds
-  dragThreshold: 0.25, // Fraction of viewport width
-  adjustLastSlide: false, // No need to adjust the last slide
-  baseFontSize: 16, // For rem conversion
-  // No need to specify 'gap' here since it's read from CSS
-});
