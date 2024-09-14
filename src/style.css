@@ -32,6 +32,10 @@
   overflow: hidden;
 }
 
+/* ================== */
+/* ?? NAVIGATION */
+/* ================== */
+
 .button.is-primary {
   background: #fff;
   box-shadow: 6px 6px rgba(255, 255, 255, 0.65);
@@ -41,7 +45,7 @@
   display: inline-flex;
   position: relative;
   z-index: 1;
-  transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: all 0.25s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   /* Apply transition to all properties */
   cursor: pointer;
   box-sizing: border-box; /* Ensure padding and border don't affect the size */
@@ -63,7 +67,7 @@
   justify-content: center;
   position: relative;
   z-index: 1;
-  transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: all 0.25s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   /* Apply transition to all properties */
   cursor: pointer;
   box-sizing: border-box; /* Ensure padding and border don't affect the size */
@@ -897,6 +901,7 @@
 .swiper-container.is-hero {
   box-sizing: border-box; /* Ensure margins don't cause overflow */
   height: 100%;
+  display: none;
 }
 .swiper.is-hero {
   width: 100%;
@@ -925,7 +930,6 @@
 
   height: auto;
 
-  /* !New */
   align-content: center;
   height: 100%;
   width: 100%;

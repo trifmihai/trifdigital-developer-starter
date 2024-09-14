@@ -1,12 +1,8 @@
 'use strict';
 
 import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import './style.css';
-import './section_pricing.css';
-import './section_hero.css';
-import './mediaQueries.css';
+import './media-queries.css';
 
 import Swiper from 'swiper';
 
@@ -135,261 +131,26 @@ function setupMaskHover() {
 }
 
 document.addEventListener('DOMContentLoaded', setupMaskHover);
-// // Use Webflow's load event
-// window.Webflow ||= [];
-// window.Webflow.push(() => {
-//   setupMaskHover();
-// });
 
-// ==============================
-//? SLIDER
-// ==============================
+const toggleButton = document.querySelector('.hamburger-wrapper');
+const navbarLinks = document.querySelector('.navbar_links');
+const navbarButtonWrapper = document.querySelector('.navbar_button-wrapper');
+const navbarComponent = document.querySelector('.navbar_component');
+const navbarContainer = document.querySelector('.navbar_container');
+const midLine = document.querySelector('.hamburger-line.is-mid');
+const topLine = document.querySelector('.hamburger-line.is-top');
+const bottomLine = document.querySelector('.hamburger-line.is-bottom');
+const body = document.querySelector('body');
 
-function initializeSlider(options = {}) {
-  // Default settings
-  const defaults = {
-    slideSelector: '.slide',
-    sliderSelector: '.slider',
-    mediaQuery: null, // Optional media query
-    transitionSpeed: 0.5, // In seconds
-    dragThreshold: 0.25, // Fraction of viewport width
-    adjustLastSlide: false, // Set to false as we'll handle gaps via CSS
-    baseFontSize: 16, // For rem conversion
-  };
+const toggleNavbar = () => {
+  navbarLinks?.classList.toggle('is-active');
+  navbarButtonWrapper?.classList.toggle('is-active');
+  navbarComponent?.classList.toggle('is-active');
+  navbarContainer?.classList.toggle('is-active');
+  midLine?.classList.toggle('is-active');
+  topLine?.classList.toggle('is-active');
+  bottomLine?.classList.toggle('is-active');
+  body?.classList.toggle('no-scroll');
+};
 
-  // Merge user options with defaults
-  const settings = { ...defaults, ...options };
-
-  let slides, slider;
-  let currentSlide = 0;
-  let maxSlide = 0;
-  let isDragging = false;
-  let startPos = 0;
-  let currentPos = 0;
-  let moveDistance = 0;
-  let sliderInitialized = false;
-  let mediaQueryList;
-
-  // Function to get the gap in pixels
-  const getGapInPixels = () => {
-    const gapValue = getComputedStyle(slider).gap || '0px';
-    const gapNumber = parseFloat(gapValue) || 0;
-
-    // Safely extract the unit, defaulting to 'px' if none is found
-    const gapUnitMatch = gapValue.match(/[a-zA-Z%]+$/);
-    const gapUnit = gapUnitMatch ? gapUnitMatch[0] : 'px';
-
-    let gapInPixels = gapNumber;
-
-    switch (gapUnit) {
-      case 'rem':
-        gapInPixels = gapNumber * settings.baseFontSize;
-        break;
-      case 'em':
-        const fontSize = parseFloat(getComputedStyle(slider).fontSize);
-        gapInPixels = gapNumber * fontSize;
-        break;
-      case 'px':
-        gapInPixels = gapNumber;
-        break;
-      case '%':
-        const sliderWidth = slider.getBoundingClientRect().width;
-        gapInPixels = (gapNumber / 100) * sliderWidth;
-        break;
-      default:
-        // Default to pixels if unit is unrecognized
-        gapInPixels = gapNumber;
-        break;
-    }
-
-    return gapInPixels;
-  };
-
-  // Initialize the slider
-  const init = () => {
-    // Handle media query if specified
-    if (settings.mediaQuery) {
-      mediaQueryList = window.matchMedia(settings.mediaQuery);
-      if (!mediaQueryList.matches) {
-        if (sliderInitialized) {
-          destroySlider();
-        }
-        return;
-      }
-    }
-
-    slides = document.querySelectorAll(settings.slideSelector);
-    slider = document.querySelector(settings.sliderSelector);
-
-    if (slides.length === 0 || !slider) {
-      console.warn('Slider or slides not found');
-      return;
-    }
-
-    if (sliderInitialized) return; // Prevent multiple initializations
-    sliderInitialized = true;
-
-    maxSlide = slides.length;
-
-    // Set up the slider
-    setupSlider();
-    attachEvents();
-  };
-
-  // Set up slider dimensions and initial position
-  const setupSlider = () => {
-    updateSliderDimensions();
-    window.addEventListener('resize', updateSliderDimensions);
-    window.addEventListener('DOMContentLoaded', updateSliderDimensions);
-  };
-
-  // Update slider dimensions
-  const updateSliderDimensions = () => {
-    // Move to the current slide
-    goToSlide(currentSlide, false);
-  };
-
-  // Go to a specific slide
-  const goToSlide = (slideIndex, smooth = true) => {
-    const slideRect = slides[0].getBoundingClientRect();
-    const slideWidth = slideRect.width;
-
-    const gap = getGapInPixels();
-    const totalWidth = slideWidth + gap;
-
-    slider.style.transition = smooth ? `transform ${settings.transitionSpeed}s ease` : 'none';
-    slider.style.transform = `translateX(-${totalWidth * slideIndex}px)`;
-  };
-
-  // Move to the next slide
-  const nextSlide = () => {
-    if (currentSlide === maxSlide - 1) {
-      currentSlide = 0;
-    } else {
-      currentSlide++;
-    }
-    goToSlide(currentSlide);
-  };
-
-  // Move to the previous slide
-  const prevSlide = () => {
-    if (currentSlide === 0) {
-      currentSlide = maxSlide - 1;
-    } else {
-      currentSlide--;
-    }
-    goToSlide(currentSlide);
-  };
-
-  // Start dragging
-  const startDrag = e => {
-    isDragging = true;
-    startPos = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-    moveDistance = 0; // Reset moveDistance
-    slider.style.transition = 'none';
-  };
-
-  // Handle dragging
-  const moveDrag = e => {
-    if (!isDragging) return;
-
-    currentPos = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-    moveDistance = currentPos - startPos;
-
-    const slideRect = slides[0].getBoundingClientRect();
-    const slideWidth = slideRect.width;
-    const gap = getGapInPixels();
-    const totalWidth = slideWidth + gap;
-
-    slider.style.transform = `translateX(${-totalWidth * currentSlide + moveDistance}px)`;
-  };
-
-  // End dragging
-  const endDrag = () => {
-    if (!isDragging) return;
-
-    isDragging = false;
-
-    // Define a minimal movement threshold (in pixels)
-    const minimalMovement = 5; // Adjust this value as needed
-
-    // Check if the move distance is significant
-    if (Math.abs(moveDistance) < minimalMovement) {
-      // Minimal movement detected, consider it a click, do not change slides
-      goToSlide(currentSlide);
-      slider.style.transition = `transform ${settings.transitionSpeed}s ease`;
-      return;
-    }
-
-    const threshold = window.innerWidth * settings.dragThreshold;
-
-    if (moveDistance > threshold) {
-      prevSlide();
-    } else if (moveDistance < -threshold) {
-      nextSlide();
-    } else {
-      goToSlide(currentSlide);
-    }
-
-    slider.style.transition = `transform ${settings.transitionSpeed}s ease`;
-  };
-
-  // Attach event listeners
-  const attachEvents = () => {
-    slider.addEventListener('mousedown', startDrag);
-    slider.addEventListener('mousemove', moveDrag);
-    slider.addEventListener('mouseup', endDrag);
-    slider.addEventListener('mouseleave', endDrag);
-    slider.addEventListener('touchstart', startDrag);
-    slider.addEventListener('touchmove', moveDrag);
-    slider.addEventListener('touchend', endDrag);
-
-    if (mediaQueryList) {
-      mediaQueryList.addEventListener('change', onMediaQueryChange);
-    }
-  };
-
-  // Detach event listeners
-  const detachEvents = () => {
-    slider.removeEventListener('mousedown', startDrag);
-    slider.removeEventListener('mousemove', moveDrag);
-    slider.removeEventListener('mouseup', endDrag);
-    slider.removeEventListener('mouseleave', endDrag);
-    slider.removeEventListener('touchstart', startDrag);
-    slider.removeEventListener('touchmove', moveDrag);
-    slider.removeEventListener('touchend', endDrag);
-
-    window.removeEventListener('resize', updateSliderDimensions);
-    window.removeEventListener('DOMContentLoaded', updateSliderDimensions);
-
-    if (mediaQueryList) {
-      mediaQueryList.removeEventListener('change', onMediaQueryChange);
-    }
-  };
-
-  // Handle media query changes
-  const onMediaQueryChange = e => {
-    if (e.matches) {
-      init();
-    } else {
-      destroySlider();
-    }
-  };
-
-  // Destroy the slider
-  const destroySlider = () => {
-    detachEvents();
-    slider.style.transform = '';
-    slider.style.transition = '';
-
-    slides.forEach(slide => {
-      slide.style.flex = '';
-    });
-
-    sliderInitialized = false;
-    currentSlide = 0;
-  };
-
-  // Initialize the slider
-  init();
-}
+toggleButton?.addEventListener('click', toggleNavbar);
