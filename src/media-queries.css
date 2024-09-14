@@ -161,14 +161,14 @@ body.no-scroll {
   }
 
   .navbar_component .padding-global {
-    height: 100%;
+    width: 100%;
   }
   .navbar_component .padding-global .container-large {
     height: 100%;
   }
 
   .navbar_component.is-active {
-    height: 100vh;
+    height: 100svh;
     background-color: var(--color--background--primary-light-1);
     padding-bottom: 2rem;
   }
