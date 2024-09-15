@@ -262,16 +262,9 @@ body.no-scroll {
   }
 
   /* !!END */
-
   /* ================== */
-  /* ? SWIPER HERO */
-  /* ================== */
-
-  .swiper-container.is-hero {
-    display: block;
-  }
-
   /* ? PLAN */
+  /* ================== */
   .plan_grid-v2 > .plan-lines_center > .plan-lines_center-line:first-child,
   .plan_grid-v2 > .plan-lines_center > .plan-lines_center-line:last-child {
     display: none;
@@ -288,6 +281,10 @@ body.no-scroll {
   /* ================== */
   /* ? SWIPER */
   /* ================== */
+
+  .swiper-container.is-hero {
+    display: block;
+  }
 
   .swiper-container {
     box-sizing: border-box; /* Ensure margins don't cause overflow */
@@ -318,13 +315,8 @@ body.no-scroll {
     height: auto;
   }
 
-  .swiper .swiper-slide:nth-child(1),
-  .swiper .swiper-slide:nth-child(2) {
+  .swiper .swiper-slide {
     width: 85%;
-  }
-
-  .swiper .swiper-slide:nth-child(3) {
-    width: 100%;
   }
 }
 
