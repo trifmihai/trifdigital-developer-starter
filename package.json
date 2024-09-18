@@ -55,6 +55,7 @@
     "@dotlottie/dotlottie-js": "^0.8.1",
     "@finsweet/ts-utils": "^0.40.0",
     "@lottiefiles/dotlottie-web": "^0.32.0",
+    "motion": "^10.18.0",
     "swiper": "^11.1.14"
   },
   "engines": {

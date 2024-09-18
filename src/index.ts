@@ -4,6 +4,7 @@ import 'swiper/css';
 import './style.css';
 import './media-queries.css';
 
+import { animate, scroll, stagger, timeline } from 'motion';
 import Swiper from 'swiper';
 
 // import { initializeSlider } from '$scripts/slider';
@@ -154,3 +155,84 @@ const toggleNavbar = () => {
 };
 
 toggleButton?.addEventListener('click', toggleNavbar);
+
+// ==============================
+// ? PLAN SECTION
+// ==============================
+
+// const obsCallback = function();
+
+// const obsOptions = {}
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+// observer.observe()
+
+// Ball animation
+const directionCircle = document.querySelector('.plan_directing-circle') as HTMLElement;
+const planContainer = document.querySelector('.plan-container-v2') as HTMLElement;
+const directionLine = document.querySelector('.plan_line') as HTMLElement;
+
+// Ball scroll animation
+scroll(animate(directionCircle, { top: [`0%`, `calc(100% - ${directionCircle.offsetWidth}px)`] }), {
+  target: planContainer,
+  offset: ['start 90%', 'end 10%'],
+});
+
+// Animate the pseudo-element height using CSS variable
+scroll(
+  ({ y }) => {
+    const progress = y.progress * 100;
+
+    // Adjust the height of the yellow part behind the ball using a CSS variable
+    directionLine.style.setProperty('--progress-height', `${progress}%`);
+  },
+  {
+    target: planContainer,
+    offset: ['start 90%', 'end 10%'],
+  }
+);
+
+// ==============================
+// ? COPY TO CLIPBOARD
+// ==============================
+
+const copyText = document.querySelector(
+  '.contact-me_card .margin-custom2 .text-size-medium'
+) as HTMLElement;
+const buttonState = document.querySelector('.copy_wrapper .text-size-regular') as HTMLElement;
+const copyWrapper = document.querySelector('.copy_wrapper') as HTMLElement;
+const clipDefaultIcon = document.querySelector('.clipboard-icon.is-default') as HTMLElement;
+const clipSuccessIcon = document.querySelector('.clipboard-icon.is-success') as HTMLElement;
+
+(function () {
+  // Function to handle the copy action
+  const handleCopy = (e: Event) => {
+    e.preventDefault();
+    const text = copyText.textContent;
+    if (text !== null) {
+      navigator.clipboard.writeText(text);
+      updateUIOnCopy();
+      setTimeout(resetUI, 10000);
+    }
+  };
+
+  // Function to update the UI when text is copied
+  const updateUIOnCopy = () => {
+    buttonState.textContent = `Bam! Email’s all yours.`;
+    copyWrapper.classList.add('copied');
+    clipDefaultIcon.classList.add('hidden');
+    clipSuccessIcon.classList.remove('hidden');
+  };
+
+  // Function to reset the UI after a delay
+  const resetUI = () => {
+    buttonState.textContent = `Copy address`;
+    copyWrapper.classList.remove('copied');
+    clipDefaultIcon.classList.remove('hidden');
+    clipSuccessIcon.classList.add('hidden');
+  };
+
+  // Add event listeners to the copy wrapper
+  copyWrapper.addEventListener('click', handleCopy);
+  copyWrapper.addEventListener('touchend', handleCopy);
+})();
