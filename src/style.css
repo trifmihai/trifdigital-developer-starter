@@ -262,12 +262,25 @@
 /* ? LINE SEPARATOR */
 /* ==================  */
 
+/* !START */
+
+/* .benefits-container img {
+  display: none;
+} */
+
+.benefit_lines.is-big {
+  display: flex;
+}
+
+/* !END */
+
 .benefits-container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: minmax(min-content, 1fr) auto minmax(min-content, 1fr);
+  grid-template-rows: max-content auto max-content;
   gap: 0;
   justify-content: center;
+  align-content: center;
   overflow: hidden;
 }
 
@@ -291,6 +304,49 @@
   grid-column: 1 / -1;
   z-index: 1;
 }
+
+/* !START */
+
+/* .line-path-base,
+.line-path-animated {
+  stroke-dasharray: 4 4;
+  fill: none;
+  stroke-width: 2;
+}
+
+.line-path-base {
+  stroke: var(--neutral--800);
+}
+
+.line-path-animated {
+  stroke: var(--neutral--500);
+}
+
+.mask-path {
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2;
+} */
+
+.benefit_lines.is-big {
+  width: 100%;
+}
+
+.benefit_lines.is-small {
+  position: relative;
+  width: 100%;
+  grid-row: 2 / 3;
+  grid-column: 1 / -1;
+  z-index: 1;
+  /* 
+  display: flex;
+  justify-content: center; */
+}
+
+.benefit_lines.is-small {
+  display: none;
+}
+/* !END */
 
 .benefit_wrapper.is-track-bottom {
   grid-row: 3 / 4;
@@ -637,6 +693,66 @@
 }
 
 /* ? END - PROOF WEBSITE CARD */
+
+/* ? START - PROOF - CENTER ELEMENT */
+
+.benefit_powerhouse-outer {
+}
+
+.benefit_powerhouse {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+}
+
+.benefit_powerhouse-inner {
+  position: relative;
+  padding: 1rem 2rem;
+  border: 1px solid var(--neutral--700);
+  background-color: #0c0d0d;
+  border-radius: 8px;
+
+  z-index: 1;
+  width: 100%;
+}
+
+.benefit_powerhouse .benefit_powerhouse-inner {
+  margin: 1px;
+}
+
+.benefit_powerhouse::before {
+  content: '';
+  display: block;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(214, 214, 214, 0.75) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  height: 300px;
+  width: 100px;
+  transform: translate(0);
+  position: absolute;
+  animation: rotate 4s linear forwards infinite;
+  z-index: 0;
+  top: 50%;
+  transform-origin: top center;
+}
+
+/* Define the keyframes for the rotate animation */
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* ================== */
 /* ? FORM */
@@ -1200,7 +1316,7 @@
 
 .copied {
   border-color: var(--neutral--600);
-  background-color: var(--neutral--800);
+  background-color: var(--neutral--900);
 }
 
 .hidden {
