@@ -321,6 +321,12 @@ body.no-scroll {
 }
 
 @media (max-width: 768px) {
+  .benefits-container {
+    grid-template-rows: repeat(3, auto);
+  }
+}
+
+@media (max-width: 768px) {
   /* ? PLAN */
   .plan_grid-v2.is-right,
   .plan_grid-v2.is-left {
@@ -347,7 +353,7 @@ body.no-scroll {
 
   .benefits-container {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, min-content);
+    grid-template-rows: repeat(3, auto);
     justify-content: center;
     align-content: center;
     place-items: unset;
