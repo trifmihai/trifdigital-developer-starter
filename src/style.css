@@ -269,10 +269,10 @@
   gap: 0;
   justify-content: center;
   align-content: center;
-  overflow: hidden;
 }
 
 .benefit_wrapper.is-track-top {
+  display: none;
   grid-row: 1 / 2;
   grid-column: 1 / -1;
 }
