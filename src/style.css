@@ -262,6 +262,10 @@
 /* ? BENEFITS */
 /* ==================  */
 
+.container-large.benefits_style {
+  display: block;
+}
+
 .benefits-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -272,7 +276,6 @@
 }
 
 .benefit_wrapper.is-track-top {
-  display: none;
   grid-row: 1 / 2;
   grid-column: 1 / -1;
 }
