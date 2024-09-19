@@ -259,10 +259,45 @@
 }
 
 /* ================== */
-/* ? LINE SEPARATOR */
+/* ? BENEFITS */
 /* ==================  */
 
+.benefits-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content auto max-content;
+  gap: 0;
+  justify-content: center;
+  align-content: center;
+  overflow: hidden;
+}
+
+.benefit_wrapper.is-track-top {
+  grid-row: 1 / 2;
+  grid-column: 1 / -1;
+}
+
+.benefit_wrapper.is-track-bottom {
+  grid-row: 3 / 4;
+  grid-column: 1 / -1;
+}
+
+.benefit_powerhouse {
+  position: relative;
+  justify-self: center;
+  grid-row: 2 / 3;
+  grid-column: 1 / -1;
+  z-index: 99;
+  background-color: #0c0d0d;
+}
+
 /* !START */
+
+.benefit_lines {
+  grid-row: 2 / 3;
+  grid-column: 1 / -1;
+  z-index: 1;
+}
 
 .benefit_lines.is-big {
   display: flex;
@@ -289,45 +324,6 @@
 .benefit_lines.is-small {
   display: none;
 }
-
-/* !END */
-
-.benefits-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: max-content max-content max-content;
-  gap: 0;
-  justify-content: center;
-  align-content: center;
-  overflow: hidden;
-}
-
-.benefit_wrapper.is-track-top {
-  grid-row: 1 / 2;
-  grid-column: 1 / -1;
-}
-
-.benefit_wrapper.is-track-bottom {
-  grid-row: 3 / 4;
-  grid-column: 1 / -1;
-}
-
-.benefit_powerhouse {
-  position: relative;
-  justify-self: center;
-  grid-row: 2 / 3;
-  grid-column: 1 / -1;
-  z-index: 99;
-  background-color: #0c0d0d;
-}
-
-.benefit_lines {
-  grid-row: 2 / 3;
-  grid-column: 1 / -1;
-  z-index: 1;
-}
-
-/* !START */
 
 /* .line-path-base,
 .line-path-animated {
@@ -689,9 +685,6 @@
 
 /* ? START - PROOF - CENTER ELEMENT */
 
-.benefit_powerhouse-outer {
-}
-
 .benefit_powerhouse {
   position: relative;
   overflow: hidden;
@@ -702,24 +695,9 @@
   border-radius: 8px;
 }
 
-.benefit_powerhouse-inner {
-  position: relative;
-  padding: 1rem 2rem;
-  border: 1px solid var(--neutral--700);
-  background-color: #0c0d0d;
-  border-radius: 8px;
-
-  z-index: 1;
-  width: 100%;
-}
-
-.benefit_powerhouse .benefit_powerhouse-inner {
-  margin: 1px;
-}
-
 .benefit_powerhouse::before {
   content: '';
-  display: block;
+  position: absolute;
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
@@ -729,7 +707,6 @@
   height: 300px;
   width: 100px;
   transform: translate(0);
-  position: absolute;
   animation: rotate 4s linear forwards infinite;
   z-index: 0;
   top: 50%;
@@ -745,6 +722,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.benefit_powerhouse-inner {
+  padding: 1rem 2rem;
+  border: 1px solid var(--neutral--700);
+  background-color: #0c0d0d;
+  border-radius: 8px;
+
+  z-index: 1;
+  width: 100%;
+  margin: 1px;
 }
 
 /* ================== */

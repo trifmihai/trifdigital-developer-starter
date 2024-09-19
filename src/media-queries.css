@@ -363,21 +363,13 @@ body.no-scroll {
     gap: 1.5rem;
   }
 
-  .benefit_wrapper.is-track-top {
-    grid-row: 1/2;
-  }
-
-  .benefit_wrapper.is-track-bottom {
-    grid-row: 3/4;
-  }
-
   .benefit_powerhouse {
     grid-row: 2/3;
     /* border: unset; */
     padding: 0;
     /* padding: 2rem; */
-    background-color: transparent;
-    place-content: center center;
+    place-content: unset;
+    justify-self: center;
     align-self: center;
   }
 
