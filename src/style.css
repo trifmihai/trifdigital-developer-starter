@@ -307,6 +307,11 @@
   grid-column: 1 / -1;
 }
 
+.benefit_wrapper.is-track-bottom {
+  grid-row: 3 / 4;
+  grid-column: 1 / -1;
+}
+
 .benefit_powerhouse {
   position: relative;
   justify-self: center;
@@ -317,7 +322,6 @@
 }
 
 .benefit_lines {
-  position: relative;
   grid-row: 2 / 3;
   grid-column: 1 / -1;
   z-index: 1;
@@ -347,11 +351,6 @@
 } */
 
 /* !END */
-
-.benefit_wrapper.is-track-bottom {
-  grid-row: 3 / 4;
-  grid-column: 1 / -1;
-}
 
 /* ================== */
 /* ? PLAN-GRID */
