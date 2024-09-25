@@ -4,7 +4,7 @@ import 'swiper/css';
 import './style.css';
 import './media-queries.css';
 
-import { animate, scroll, timeline } from 'motion';
+import { animate, inView, scroll, timeline } from 'motion';
 import Swiper from 'swiper';
 
 // import { initializeSlider } from '$scripts/slider';
@@ -38,22 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
   elementsToUnmask.forEach(function (element) {
     // Remove the mask effect by adding the 'no-mask' class
     element.classList.remove('container-large', 'radial-gradient');
-  });
-});
-
-// Add an effect to .stakes_card that's a smooth red border color change on hover
-const stakesCards = document.querySelectorAll('.stakes_card');
-
-stakesCards.forEach(card => {
-  const cardElement = card as HTMLElement; // Cast to HTMLElement
-  cardElement.style.transition = 'border-color 0.3s ease'; // Add smooth transition
-
-  cardElement.addEventListener('mouseenter', () => {
-    cardElement.style.borderColor = 'red';
-  });
-
-  cardElement.addEventListener('mouseleave', () => {
-    cardElement.style.borderColor = ''; // Reset border color
   });
 });
 
@@ -97,12 +81,15 @@ document.addEventListener('DOMContentLoaded', autoResizeTextarea);
 
 // Accordion
 document.querySelectorAll('.accordion-item').forEach(item => {
-  const header = item.querySelector('.accordion-item-header');
-  if (header) {
-    header.addEventListener('click', () => {
+  item.addEventListener('click', event => {
+    // Check if the click is inside the accordion-item-header or the parent accordion-item
+    const header = event.target.closest('.accordion-item-header');
+
+    // Toggle the class only if header or its child is clicked
+    if (header || event.target === item) {
       item.classList.toggle('open');
-    });
-  }
+    }
+  });
 });
 
 // ==============================
@@ -111,7 +98,7 @@ document.querySelectorAll('.accordion-item').forEach(item => {
 
 function setupMaskHover() {
   const maskedElements = document.querySelectorAll(
-    '.container-large.radial-gradient, .container-large.cta_radial_gradient, .container-large.radial-gradient-projects'
+    '.container-large.radial-gradient, .container-large.cta_radial-gradient, .container-large.radial-gradient-projects, .plan_grid-v2.is-left, .plan_grid-v2.is-right'
   );
 
   maskedElements.forEach(element => {
@@ -125,14 +112,15 @@ function setupMaskHover() {
     });
 
     element.addEventListener('mouseleave', () => {
-      (element as HTMLElement).style.setProperty('--mouse-x', '50%');
-      (element as HTMLElement).style.setProperty('--mouse-y', '50%');
+      (element as HTMLElement).style.setProperty('--mouse-x', '-100%');
+      (element as HTMLElement).style.setProperty('--mouse-y', '-100%');
     });
   });
 }
 
 document.addEventListener('DOMContentLoaded', setupMaskHover);
 
+// ?? =================
 const toggleButton = document.querySelector('.hamburger-wrapper');
 const navbarLinks = document.querySelector('.navbar_links');
 const navbarButtonWrapper = document.querySelector('.navbar_button-wrapper');
@@ -167,24 +155,33 @@ toggleButton?.addEventListener('click', toggleNavbar);
 // const observer = new IntersectionObserver(obsCallback, obsOptions);
 // observer.observe()
 
-// Ball animation
+// Smooth ball animation with easing
 const directionCircle = document.querySelector('.plan_directing-circle') as HTMLElement;
 const planContainer = document.querySelector('.plan-container-v2') as HTMLElement;
 const directionLine = document.querySelector('.plan_line') as HTMLElement;
 
-// Ball scroll animation
-scroll(animate(directionCircle, { top: [`0%`, `calc(100% - ${directionCircle.offsetWidth}px)`] }), {
-  target: planContainer,
-  offset: ['start 90%', 'end 10%'],
-});
+// Ball scroll animation with easing
+scroll(
+  animate(
+    directionCircle,
+    { top: [`0%`, `calc(100% - ${directionCircle.offsetWidth}px)`] },
+    { easing: 'ease-out' } // Add smooth easing
+  ),
+  {
+    target: planContainer,
+    offset: ['start 90%', 'end 10%'],
+  }
+);
 
-// Animate the pseudo-element height using CSS variable
+// Animate the pseudo-element height using CSS variable with scroll throttling
 scroll(
   ({ y }) => {
     const progress = y.progress * 100;
 
-    // Adjust the height of the yellow part behind the ball using a CSS variable
-    directionLine.style.setProperty('--progress-height', `${progress}%`);
+    // Use requestAnimationFrame for smoother updates
+    requestAnimationFrame(() => {
+      directionLine.style.setProperty('--progress-height', `${progress}%`);
+    });
   },
   {
     target: planContainer,
@@ -218,7 +215,7 @@ const clipSuccessIcon = document.querySelector('.clipboard-icon.is-success') as 
 
   // Function to update the UI when text is copied
   const updateUIOnCopy = () => {
-    buttonState.textContent = `Bam! Email’s all yours.`;
+    buttonState.textContent = `Successfully copied!`;
     copyWrapper.classList.add('copied');
     clipDefaultIcon.classList.add('hidden');
     clipSuccessIcon.classList.remove('hidden');
@@ -380,5 +377,205 @@ animateSVGScroll({
   animatedLineColor: 'var(--neutral--500)', // Or any color you prefer
   strokeWidth: 2,
   strokeDasharray: '4 4',
-  scrollOffsets: ['start end', 'end 65%'],
+  scrollOffsets: ['20% end', 'end 65%'],
+});
+
+// ==============================
+// ? NAVBAR
+// ==============================
+
+// ? Switch button
+
+// Define the media query
+const mediaQuery = window.matchMedia('(max-width: 911px)');
+
+// Function to switch classes based on media query state
+const switchButtonClass = e => {
+  const button = document.querySelector('.button');
+  if (e.matches) {
+    // Media query matches (e.g., screen width is 768px or less)
+    button.classList.remove('is-secondary');
+    button.classList.add('is-primary');
+  } else {
+    // Media query does not match (e.g., screen width is greater than 768px)
+    button.classList.remove('is-primary');
+    button.classList.add('is-secondary');
+  }
+};
+
+// Initial check
+switchButtonClass(mediaQuery);
+
+// Add event listener to handle changes in the media query state
+mediaQuery.addEventListener('change', switchButtonClass);
+
+// ==============================
+// ? FORM
+// ==============================
+
+// ? Select related radio button
+
+// Function to handle pricing button clicks
+const handlePricingButtonClick = event => {
+  const button = event.target.closest('.button');
+  if (!button || !button.closest('.pricing_card-heading')) return;
+
+  const selectedOption = button.getAttribute('data-option');
+
+  // Scroll to the form section
+  // document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+
+  // Set the corresponding radio button
+  const radioButtonId = `radio-option${selectedOption.slice(-1)}`;
+  const radioButton = document.getElementById(radioButtonId);
+  if (radioButton) {
+    radioButton.checked = true;
+
+    // Optionally trigger a reflow/repaint
+    radioButton.dispatchEvent(new Event('change', { bubbles: true }));
+  } else {
+    console.error(`Radio button with ID ${radioButtonId} not found`);
+  }
+};
+
+// Add event listener to the parent element
+document.body.addEventListener('click', handlePricingButtonClick);
+
+// ==============================
+// ? STAKES ANIMATION
+// ==============================
+
+// Function to apply floating animation while hovered, alternating Y direction
+function applyFloatingEffect(elements) {
+  elements.forEach((element, index) => {
+    // Alternate the Y direction based on whether the index is even or odd
+    const translateYValues = index % 2 === 0 ? ['0%', '-12%', '0%'] : ['0%', '12%', '0%'];
+    const floatingAnimation = animate(
+      element,
+      { translateY: translateYValues },
+      { duration: 3.5, easing: 'ease-in-out', repeat: Infinity }
+    );
+    element.floatingAnimation = floatingAnimation; // Store the animation instance so we can cancel it later
+  });
+}
+
+// Function to stop floating animation on mouse leave
+function stopFloatingEffect(elements) {
+  elements.forEach(element => {
+    if (element.floatingAnimation) {
+      element.floatingAnimation.cancel(); // Stop the floating animation
+      element.floatingAnimation = null; // Clean up the reference
+    }
+  });
+}
+
+// Function to apply hover animations (handles both enter, leave, and floating)
+function applyHoverAnimations(card, floatingElements, textElement, iconElement, hoverStyles) {
+  card.addEventListener('mouseenter', () => {
+    // Apply the hover "enter" animations
+    floatingElements.forEach((element, index) => {
+      const enterTransform = hoverStyles[index]?.enter || {};
+      animate(element, enterTransform, { duration: 0.2, easing: 'ease-out' });
+    });
+    animate(card, { borderColor: '#9B4A44' }, { duration: 0.2, easing: 'ease-out' });
+    animate(textElement, { color: '#9B4A44' }, { duration: 0.2, easing: 'ease-out' });
+    animate(iconElement, { stroke: '#9B4A44' }, { duration: 0.2, easing: 'ease-out' });
+
+    // Start floating effect during hover
+    applyFloatingEffect(floatingElements);
+  });
+
+  card.addEventListener('mouseleave', () => {
+    // Apply the hover "leave" animations
+    floatingElements.forEach((element, index) => {
+      const leaveTransform = hoverStyles[index]?.leave || {};
+      animate(element, leaveTransform, { duration: 0.2, easing: 'ease-in' });
+    });
+    animate(card, { borderColor: 'var(--neutral--700)' }, { duration: 0.2, easing: 'ease-in' });
+    animate(
+      textElement,
+      { color: 'var(--color--text--light--primary)' },
+      { duration: 0.2, easing: 'ease-in' }
+    );
+    animate(
+      iconElement,
+      { stroke: 'var(--color--text--light--primary)' },
+      { duration: 0.2, easing: 'ease-in' }
+    );
+
+    // Stop the floating effect when hover is removed
+    stopFloatingEffect(floatingElements);
+  });
+}
+
+// Function to initialize a single card's animations dynamically
+function initCardAnimations(card, hoverStyles) {
+  // Dynamically select all floating elements inside the card
+  const floatingElements = Array.from(card.querySelectorAll('.stakes-floating'));
+
+  const textElement = card.querySelector('.stakes_content-wrapper > .text-size-regular');
+  const iconElement = card.querySelector('.benefit_icon-wrapper > .stakes_icon > svg > path');
+
+  // Apply hover animations with floating effects
+  applyHoverAnimations(card, floatingElements, textElement, iconElement, hoverStyles);
+}
+
+// List of hover styles for cards, allowing different numbers of floating elements
+const cardHoverStyles = [
+  // Card 1 hover styles (3 floating elements)
+  [
+    {
+      enter: { top: '-4%', left: '-53%', rotate: 13, scale: 1 },
+      leave: { top: '49%', left: '5%', rotate: 0, scale: 0.5 },
+    },
+    {
+      enter: { top: '73%', left: '-40%', rotate: -13, scale: 1 },
+      leave: { top: '20%', left: '5%', rotate: 0, scale: 0.5 },
+    },
+    {
+      enter: { top: '57%', left: '111%', rotate: 13, scale: 1 },
+      leave: { top: '41%', left: '67%', rotate: 0, scale: 0.5 },
+    },
+  ],
+  // Card 2 hover styles (3 floating elements, different positions)
+  [
+    {
+      enter: { top: '35%', left: '-47%', rotate: 13, scale: 1 },
+      leave: { top: '5%', left: '5%', rotate: 0, scale: 0.5 },
+    },
+    {
+      enter: { top: '13%', left: '104%', rotate: -13, scale: 1 },
+      leave: { top: '57%', left: '61%', rotate: 0, scale: 0.5 },
+    },
+    {
+      enter: { top: '87%', left: '117%', rotate: 13, scale: 1 },
+      leave: { top: '31%', left: '67%', rotate: 0, scale: 0.5 },
+    },
+  ],
+  // Card 3 hover styles (4 floating elements, showing flexibility)
+  [
+    {
+      enter: { top: '4%', left: '-47%', rotate: -13, scale: 1 },
+      leave: { top: '50%', left: '5%', rotate: 0, scale: 0.5 },
+    },
+    {
+      enter: { top: '66%', left: '-27%', rotate: 13, scale: 1 },
+      leave: { top: '15%', left: '10%', rotate: 0, scale: 0.5 },
+    },
+    {
+      enter: { top: '40%', left: '107%', rotate: -13, scale: 1 },
+      leave: { top: '41%', left: '60%', rotate: 0, scale: 0.5 },
+    },
+    {
+      enter: { top: '20%', left: '90%', rotate: 5, scale: 1 },
+      leave: { top: '25%', left: '65%', rotate: 0, scale: 0.5 },
+    },
+  ],
+];
+
+// Initialize animations for each card
+const cards = document.querySelectorAll('.stakes_card');
+cards.forEach((card, index) => {
+  const hoverStyles = cardHoverStyles[index] || []; // Apply styles based on card index
+  initCardAnimations(card, hoverStyles);
 });

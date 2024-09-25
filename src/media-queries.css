@@ -539,3 +539,9 @@ body.no-scroll {
     padding-right: 1.25rem;
   }
 }
+
+@media screen and (min-width: 479px) {
+  .hide-from-mobile-portrait {
+    display: none !important;
+  }
+}
