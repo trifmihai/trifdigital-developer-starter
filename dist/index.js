@@ -5747,9 +5747,7 @@
         transform: [
           "translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(0deg)",
           "translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(-15deg)",
-          "translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(10deg)",
-          "translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(6deg)",
-          "translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(-4deg)",
+          "translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(4deg)",
           "translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(0deg)"
         ]
       },
