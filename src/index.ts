@@ -80,6 +80,18 @@ function autoResizeTextarea() {
 document.addEventListener('DOMContentLoaded', autoResizeTextarea);
 
 // Accordion
+// document.querySelectorAll('.accordion-item').forEach(item => {
+//   item.addEventListener('click', event => {
+//     // Check if the click is inside the accordion-item-header or the parent accordion-item
+//     const header = event.target.closest('.accordion-item-header');
+
+//     // Toggle the class only if header or its child is clicked
+//     if (header || event.target === item) {
+//       item.classList.toggle('open');
+//     }
+//   });
+// });
+
 document.querySelectorAll('.accordion-item').forEach(item => {
   item.addEventListener('click', event => {
     // Check if the click is inside the accordion-item-header or the parent accordion-item
@@ -88,6 +100,22 @@ document.querySelectorAll('.accordion-item').forEach(item => {
     // Toggle the class only if header or its child is clicked
     if (header || event.target === item) {
       item.classList.toggle('open');
+
+      // Find the description wrapper with the combo class .is-profile
+      const descriptionWrapper = item.querySelector(
+        '.accordion-item-description-wrapper.is-profile'
+      );
+      if (descriptionWrapper) {
+        if (item.classList.contains('open')) {
+          // Delay setting overflow to visible by 0.2 seconds
+          setTimeout(() => {
+            descriptionWrapper.style.overflow = 'visible';
+          }, 200);
+        } else {
+          // Immediately set overflow to hidden
+          descriptionWrapper.style.overflow = 'hidden';
+        }
+      }
     }
   });
 });
@@ -445,6 +473,36 @@ document.body.addEventListener('click', handlePricingButtonClick);
 // ? STAKES ANIMATION
 // ==============================
 
+const mikeButton = document.querySelector('.text-size-small.profile_button');
+const mikeProfile = document.querySelector('.profile-container');
+
+mikeButton.addEventListener('mouseenter', () => {
+  animate(
+    mikeProfile,
+    {
+      opacity: [0, 1],
+      top: ['200%', '0%'],
+      transform: [
+        'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(0deg)',
+        'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(-15deg)',
+        'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(10deg)',
+        'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(6deg)',
+        'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(-4deg)',
+        'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(0deg)',
+      ],
+    },
+    { duration: 0.3, easing: 'ease-out' }
+  );
+});
+
+mikeButton.addEventListener('mouseleave', () => {
+  animate(
+    mikeProfile,
+    { opacity: [1, 0], top: ['0%', '100%'] },
+    { duration: 0.2, easing: 'ease-in' }
+  );
+});
+
 // Function to apply floating animation while hovered, alternating Y direction
 function applyFloatingEffect(elements) {
   elements.forEach((element, index) => {
@@ -579,3 +637,13 @@ cards.forEach((card, index) => {
   const hoverStyles = cardHoverStyles[index] || []; // Apply styles based on card index
   initCardAnimations(card, hoverStyles);
 });
+
+// ==============================
+// ? MIKE PROFILE
+// ==============================
+
+// animate(
+//   element,
+//   { translateY: translateYValues },
+//   { duration: 3.5, easing: 'ease-in-out', repeat: Infinity }
+// );

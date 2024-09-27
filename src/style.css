@@ -198,14 +198,14 @@
   position: relative;
 }
 
-.truck-lights {
+/* .truck-lights {
   position: absolute;
   z-index: 999;
   width: 29.08%;
 
   bottom: -9%;
   left: 34%;
-}
+} */
 
 .project-1--part-2-2 {
   z-index: 87;
@@ -758,7 +758,7 @@
 .benefit_powerhouse-inner {
   padding: 1rem 2rem;
   border: 1px solid var(--neutral--700);
-  background-color: #0c0d0d;
+  background-color: var(--color--background--primary-light-1);
   border-radius: 8px;
 
   z-index: 1;
@@ -961,12 +961,7 @@
       transparent 0,
       #000 100%
     ),
-    radial-gradient(
-      ellipse at center,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(12, 13, 13, 1) 80%,
-      rgba(12, 13, 13, 1) 100%
-    );
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) -70%, rgba(12, 13, 13, 1) 80%);
   mask-composite: intersect;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -1142,8 +1137,8 @@
 .shelby-book {
   position: absolute;
   top: -1.5%;
-  left: 30%;
-  width: 100%;
+  left: 44%;
+  width: 70%;
   z-index: 99;
 }
 /* END */
@@ -1345,6 +1340,14 @@
 /* ? GRID LINES */
 /* ================== */
 
+.proof-card.proof-project_results
+  > .container-large.proof_radial-gradient
+  > .hero-content-wrapper
+  > .header_component
+  > .horizontal-line {
+  border-top: 1px dashed var(--neutral--700);
+}
+
 .plan-social_grid > .center-lines > .center-line > .vertical-line {
   border-left: 1px dashed var(--neutral--700);
 }
@@ -1376,3 +1379,16 @@
 /* ================== */
 /* ? LINE SEPARATOR */
 /* ================== */
+
+/* ==============================*/
+/* ? MIKE PROFILE */
+/* ============================== */
+
+.text-size-small.profile_button {
+  cursor: pointer;
+}
+
+.profile-container {
+  opacity: 0;
+  pointer-events: none;
+}
