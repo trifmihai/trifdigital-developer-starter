@@ -36,6 +36,10 @@
 /* ?? NAVIGATION */
 /* ================== */
 
+.hamburger-wrapper {
+  cursor: pointer;
+}
+
 .button.is-primary {
   background: #fff;
   box-shadow: 6px 6px rgba(255, 255, 255, 0.65);
@@ -83,33 +87,6 @@
 .container-large.radial-gradient-projects {
   position: relative;
 }
-/* 
-.container-large.radial-gradient::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 999;
-  background-color: #0c0d0d;
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(12, 13, 13, 1) 85%,
-    rgba(12, 13, 13, 1) 100%
-  );
-  mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(12, 13, 13, 1) 85%,
-    rgba(12, 13, 13, 1) 100%
-  );
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  pointer-events: none;
-  mask-size: cover; 
-} */
 
 .masked-content {
   position: relative;
@@ -120,33 +97,6 @@
   position: relative;
   z-index: 1000; /* Ensure it's above the mask */
 }
-
-/* .container-large.radial-gradient-projects::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 999;
-  background-color: #0c0d0d;
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0) -20%,
-    rgba(12, 13, 13, 1) 70%,
-    rgba(12, 13, 13, 1) 100%
-  );
-  mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0) -20%,
-    rgba(12, 13, 13, 1) 70%,
-    rgba(12, 13, 13, 1) 100%
-  );
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  pointer-events: none;
-  mask-size: cover;
-} */
 
 /* ================== */
 /* ? HERO SECTION */
@@ -197,15 +147,6 @@
 
   position: relative;
 }
-
-/* .truck-lights {
-  position: absolute;
-  z-index: 999;
-  width: 29.08%;
-
-  bottom: -9%;
-  left: 34%;
-} */
 
 .project-1--part-2-2 {
   z-index: 87;
@@ -328,27 +269,6 @@
   display: none;
 }
 
-/* .line-path-base,
-.line-path-animated {
-  stroke-dasharray: 4 4;
-  fill: none;
-  stroke-width: 2;
-}
-
-.line-path-base {
-  stroke: var(--neutral--800);
-}
-
-.line-path-animated {
-  stroke: var(--neutral--500);
-}
-
-.mask-path {
-  stroke: #fff;
-  fill: none;
-  stroke-width: 2;
-} */
-
 /* !END */
 
 /* ================== */
@@ -406,10 +326,6 @@
   bottom: 0;
   z-index: 9;
   background-color: #0c0d0d;
-  /* -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  pointer-events: none;
-  mask-size: cover; */
   mask-composite: intersect;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -1229,14 +1145,6 @@
 }
 
 /* ================== */
-/* ? FOOTER */
-/* ================== */
-
-.footer_separator {
-  /* margin-top: 0; */
-}
-
-/* ================== */
 /* ? ANIMATIONS */
 /* ================== */
 
@@ -1367,18 +1275,11 @@
   background-color: var(--color--background--primary);
   z-index: 10;
   border-radius: 8px;
-  /*
-  border: 1px solid;
-  border-color: var(--neutral--700); */
   top: 0;
   left: 0;
   width: calc(100% - 1px);
   height: calc(100% - 1px);
 }
-
-/* ================== */
-/* ? LINE SEPARATOR */
-/* ================== */
 
 /* ==============================*/
 /* ? MIKE PROFILE */

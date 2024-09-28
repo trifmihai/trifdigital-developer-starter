@@ -7,19 +7,6 @@
   align-items: flex-end;
 }
 
-/* html {
-      font-size: calc(0.5rem + 0.41666666666666663vw);
-    } */
-@media screen and (max-width: 1920px) {
-  /* html {
-        font-size: calc(0.49999999999999994rem + 0.41666666666666674vw);
-      } */
-}
-@media screen and (max-width: 1440px) {
-  /* html {
-        font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
-      } */
-}
 @media screen and (max-width: 767px) {
   .heading-style-h1 {
     font-size: var(--h-size--h3);
@@ -77,9 +64,6 @@
 }
 
 @media screen and (max-width: 479px) {
-  /* html {
-        font-size: calc(0.8747384937238494rem + 0.41841004184100417vw);
-      } */
   /* ?? PROOF */
   /* ? PROOF RESULTS CARD */
   .proof_center-lines > .proof_center-line:first-child {
@@ -174,7 +158,6 @@ body.no-scroll {
   }
 
   .navbar_container {
-    /* position: relative; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -418,9 +401,6 @@ body.no-scroll {
 
     flex-wrap: unset;
     align-items: flex-start;
-
-    /* align-items: center;
-          text-align: center; */
   }
 
   .proof-project_features {
@@ -484,24 +464,6 @@ body.no-scroll {
 }
 
 @media (max-width: 546px) {
-  /* !! TO UPDATE */
-  /* .hero-mini-wrapper {
-        display: inline-flex;
-        flex-wrap: nowrap;
-      }
-    
-      .hero-mini-card {
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
-        flex-shrink: 0;
-      }
-    
-      .webflow-icon {
-        max-width: 2rem;
-        flex-shrink: 0; */
-  /* !! TO UPDATE / */
-
   /* ? PLAN SUCCESS TEXT */
   .heading-style-h5.is-plan_testimonial {
     font-size: var(--h-size--h6);

@@ -4,11 +4,8 @@ import 'swiper/css';
 import './style.css';
 import './media-queries.css';
 
-import { animate, inView, scroll, timeline } from 'motion';
+import { animate, scroll } from 'motion';
 import Swiper from 'swiper';
-
-// import { initializeSlider } from '$scripts/slider';
-import { greetUser } from '$utils/greet';
 
 // Initialize Swiper
 const swiper = new Swiper('.swiper', {
@@ -23,12 +20,6 @@ const swiper = new Swiper('.swiper', {
   slidesPerView: 'auto',
   spaceBetween: 16,
   grabCursor: true,
-});
-
-window.Webflow ||= [];
-window.Webflow.push(() => {
-  const name = 'Mike';
-  greetUser(name);
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -61,9 +52,9 @@ document.querySelectorAll('.form-radio input[type="radio"]').forEach(radio => {
 
 // Auto resize textarea
 function autoResizeTextarea() {
-  const textareas = document.querySelectorAll('textarea');
+  const textAreas = document.querySelectorAll('textarea');
 
-  textareas.forEach(textarea => {
+  textAreas.forEach(textarea => {
     textarea.addEventListener('input', function (this: HTMLTextAreaElement) {
       // Reset height to auto to get the correct scrollHeight
       this.style.height = 'auto';
@@ -78,19 +69,6 @@ function autoResizeTextarea() {
 
 // Call the function when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', autoResizeTextarea);
-
-// Accordion
-// document.querySelectorAll('.accordion-item').forEach(item => {
-//   item.addEventListener('click', event => {
-//     // Check if the click is inside the accordion-item-header or the parent accordion-item
-//     const header = event.target.closest('.accordion-item-header');
-
-//     // Toggle the class only if header or its child is clicked
-//     if (header || event.target === item) {
-//       item.classList.toggle('open');
-//     }
-//   });
-// });
 
 document.querySelectorAll('.accordion-item').forEach(item => {
   item.addEventListener('click', event => {
@@ -148,40 +126,9 @@ function setupMaskHover() {
 
 document.addEventListener('DOMContentLoaded', setupMaskHover);
 
-// ?? =================
-const toggleButton = document.querySelector('.hamburger-wrapper');
-const navbarLinks = document.querySelector('.navbar_links');
-const navbarButtonWrapper = document.querySelector('.navbar_button-wrapper');
-const navbarComponent = document.querySelector('.navbar_component');
-const navbarContainer = document.querySelector('.navbar_container');
-const midLine = document.querySelector('.hamburger-line.is-mid');
-const topLine = document.querySelector('.hamburger-line.is-top');
-const bottomLine = document.querySelector('.hamburger-line.is-bottom');
-const body = document.querySelector('body');
-
-const toggleNavbar = () => {
-  navbarLinks?.classList.toggle('is-active');
-  navbarButtonWrapper?.classList.toggle('is-active');
-  navbarComponent?.classList.toggle('is-active');
-  navbarContainer?.classList.toggle('is-active');
-  midLine?.classList.toggle('is-active');
-  topLine?.classList.toggle('is-active');
-  bottomLine?.classList.toggle('is-active');
-  body?.classList.toggle('no-scroll');
-};
-
-toggleButton?.addEventListener('click', toggleNavbar);
-
 // ==============================
 // ? PLAN SECTION
 // ==============================
-
-// const obsCallback = function();
-
-// const obsOptions = {}
-
-// const observer = new IntersectionObserver(obsCallback, obsOptions);
-// observer.observe()
 
 // Smooth ball animation with easing
 const directionCircle = document.querySelector('.plan_directing-circle') as HTMLElement;
@@ -637,11 +584,34 @@ cards.forEach((card, index) => {
 });
 
 // ==============================
-// ? MIKE PROFILE
+// ? NAVIGATION
 // ==============================
 
-// animate(
-//   element,
-//   { translateY: translateYValues },
-//   { duration: 3.5, easing: 'ease-in-out', repeat: Infinity }
-// );
+const toggleButton = document.querySelector('.hamburger-wrapper');
+const navbarLink = document.querySelector('.navbar_links');
+const navbarButtonWrapper = document.querySelector('.navbar_button-wrapper');
+const navbarComponent = document.querySelector('.navbar_component');
+const navbarContainer = document.querySelector('.navbar_container');
+const midLine = document.querySelector('.hamburger-line.is-mid');
+const topLine = document.querySelector('.hamburger-line.is-top');
+const bottomLine = document.querySelector('.hamburger-line.is-bottom');
+const body = document.querySelector('body');
+
+const toggleNavbar = () => {
+  navbarLink?.classList.toggle('is-active');
+  navbarButtonWrapper?.classList.toggle('is-active');
+  navbarComponent?.classList.toggle('is-active');
+  navbarContainer?.classList.toggle('is-active');
+  midLine?.classList.toggle('is-active');
+  topLine?.classList.toggle('is-active');
+  bottomLine?.classList.toggle('is-active');
+  body?.classList.toggle('no-scroll');
+};
+
+toggleButton?.addEventListener('click', toggleNavbar);
+navbarButtonWrapper?.addEventListener('click', toggleNavbar);
+
+const navbarLinkWrapper = document.querySelectorAll('.navbar_link-wrapper');
+navbarLinkWrapper.forEach(link => {
+  link.addEventListener('click', toggleNavbar);
+});
