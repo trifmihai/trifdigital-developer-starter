@@ -494,7 +494,7 @@ function applyHoverAnimations(card, floatingElements, textElement, iconElement, 
       const leaveTransform = hoverStyles[index]?.leave || {};
       animate(element, leaveTransform, { duration: 0.2, easing: 'ease-in' });
     });
-    animate(card, { borderColor: 'var(--neutral--700)' }, { duration: 0.2, easing: 'ease-in' });
+    animate(card, { borderColor: 'var(--neutral--800)' }, { duration: 0.2, easing: 'ease-in' });
     animate(
       textElement,
       { color: 'var(--color--text--light--primary)' },
@@ -596,22 +596,28 @@ const midLine = document.querySelector('.hamburger-line.is-mid');
 const topLine = document.querySelector('.hamburger-line.is-top');
 const bottomLine = document.querySelector('.hamburger-line.is-bottom');
 const body = document.querySelector('body');
+const navbarLinkWrapper = document.querySelectorAll('.navbar_link-wrapper');
 
+// Media query to check for max-width 911px
+const mediaQueryNav = window.matchMedia('(max-width: 911px)');
+
+// Function to toggle the navbar
 const toggleNavbar = () => {
-  navbarLink?.classList.toggle('is-active');
-  navbarButtonWrapper?.classList.toggle('is-active');
-  navbarComponent?.classList.toggle('is-active');
-  navbarContainer?.classList.toggle('is-active');
-  midLine?.classList.toggle('is-active');
-  topLine?.classList.toggle('is-active');
-  bottomLine?.classList.toggle('is-active');
-  body?.classList.toggle('no-scroll');
+  if (mediaQueryNav.matches) {
+    navbarLink?.classList.toggle('is-active');
+    navbarButtonWrapper?.classList.toggle('is-active');
+    navbarComponent?.classList.toggle('is-active');
+    navbarContainer?.classList.toggle('is-active');
+    midLine?.classList.toggle('is-active');
+    topLine?.classList.toggle('is-active');
+    bottomLine?.classList.toggle('is-active');
+    body?.classList.toggle('no-scroll');
+  }
 };
 
+// Add event listeners
 toggleButton?.addEventListener('click', toggleNavbar);
 navbarButtonWrapper?.addEventListener('click', toggleNavbar);
-
-const navbarLinkWrapper = document.querySelectorAll('.navbar_link-wrapper');
 navbarLinkWrapper.forEach(link => {
   link.addEventListener('click', toggleNavbar);
 });

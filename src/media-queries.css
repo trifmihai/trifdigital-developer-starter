@@ -72,7 +72,7 @@
 
   /* ? PROOF FEATURES CARD */
   .proof-card.proof-project_features {
-    align-items: flex-start;
+    align-items: center;
   }
 
   /* ? FORM THIRD OPTION SAVINGS */
@@ -87,7 +87,7 @@
   }
 }
 
-@media (max-width: 1110px) {
+@media (max-width: 1440px) {
   .plan_grid-v2 > .plan-lines_center > .plan-lines_center-line:nth-child(2n) {
     display: none;
   }
@@ -411,6 +411,7 @@ body.no-scroll {
     gap: 1rem;
   }
 
+  .accordion-item-header > .text-size-medium,
   .contact-me_card div .text-size-medium {
     font-size: var(--text-size-medium);
     line-height: var(--text-line-height-medium);

@@ -28,6 +28,35 @@
   --text-line-height-tiny: 1.33;
 }
 
+:root {
+  --font-size-0: 0.875;
+
+  --font-size-1: 0.875;
+
+  --font-size-2: 0.875;
+
+  --font-size-3: 0.875;
+}
+
+html {
+  font-size: calc(var(--font-size-3) * 1rem);
+}
+@media screen and (max-width: 1920px) {
+  html {
+    font-size: calc(var(--font-size-2) * 1rem);
+  }
+}
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: calc(var(--font-size-1) * 1rem);
+  }
+}
+@media screen and (max-width: 479px) {
+  html {
+    font-size: calc(var(--font-size-0) * 1rem);
+  }
+}
+
 .page-wrapper {
   overflow: hidden;
 }
@@ -306,6 +335,12 @@
   position: relative;
   align-self: center;
 }
+/* .plan_grid-v2.is-left > .plan-lines_center {
+  justify-content: start;
+}
+.plan_grid-v2.is-right > .plan-lines_center {
+  justify-content: end;
+} */
 
 .plan_grid-v2.is-right {
   width: 100%;
@@ -393,6 +428,7 @@
 }
 
 .plan-card-social_wrapper {
+  border: 1px solid var(--neutral--800);
   padding-bottom: 0;
 }
 
@@ -429,7 +465,7 @@
   right: 0;
   bottom: 0;
   z-index: 999;
-  background-color: #0c0d0d;
+  background-color: var(--color--background--primary-light-1);
   -webkit-mask-image: radial-gradient(
     circle at center,
     rgba(0, 0, 0, 0) -10%,
@@ -714,7 +750,7 @@
   /* prettier-ignore */
   background: linear-gradient(
     to bottom,
-    rgba(70, 70, 70, 1) 0%,
+    rgba(41, 41, 41, 1) 0%,
     rgba(70, 70, 70, 0) 100%
   )
     border-box;
@@ -1163,7 +1199,7 @@
 .plan-card-small_wrapper,
 .plan-card-social_wrapper {
   position: relative;
-  background-color: var(--color--background--primary);
+  background-color: var(--color--background--primary-light-1);
   z-index: 99;
 }
 
@@ -1178,7 +1214,7 @@
 .plan_line {
   position: relative;
   height: 100%;
-  width: 1px;
+  width: 2px;
   background: repeating-linear-gradient(
     to bottom,
     var(--neutral--700),
@@ -1197,8 +1233,8 @@
   width: 100%;
   background: repeating-linear-gradient(
     to bottom,
-    var(--neutral--100),
-    var(--neutral--100) 4px,
+    var(--neutral--500),
+    var(--neutral--500) 4px,
     transparent 4px,
     transparent 8px
   );
@@ -1291,4 +1327,29 @@
 .profile-container {
   opacity: 0;
   pointer-events: none;
+}
+
+/* CARD BACKGROUNDS */
+.benefit_card,
+.stakes_card::before,
+.accordion-item,
+.contact-me_card {
+  background-color: var(--color--background--primary-light-1);
+}
+
+/* CARD BORDERS */
+.benefit_card,
+.stakes_card::before,
+.accordion-item,
+.contact-me_card,
+.proof-card,
+.plan-card-small_wrapper,
+.plan-card_wrapper,
+.hero-mini-card,
+.card-spots_status {
+  border: 1px solid var(--neutral--800);
+}
+
+.stakes_card {
+  border: none;
 }
