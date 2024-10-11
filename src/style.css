@@ -842,7 +842,7 @@ html {
 /* ================== */
 
 .open {
-  border: 1px solid #727272;
+  border: 1px solid var(--neutral--600);
 }
 .accordion-item {
   grid-row-gap: 0;
@@ -1331,16 +1331,14 @@ html {
 
 /* CARD BACKGROUNDS */
 .benefit_card,
-.stakes_card::before,
 .accordion-item,
+.stakes_card::before,
 .contact-me_card {
   background-color: var(--color--background--primary-light-1);
 }
 
 /* CARD BORDERS */
 .benefit_card,
-.stakes_card::before,
-.accordion-item,
 .contact-me_card,
 .proof-card,
 .plan-card-small_wrapper,
@@ -1348,8 +1346,4 @@ html {
 .hero-mini-card,
 .card-spots_status {
   border: 1px solid var(--neutral--800);
-}
-
-.stakes_card {
-  border: none;
 }

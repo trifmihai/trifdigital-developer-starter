@@ -417,7 +417,7 @@ const handlePricingButtonClick = event => {
 document.body.addEventListener('click', handlePricingButtonClick);
 
 // ==============================
-// ? STAKES ANIMATION
+// ? PROFILE ANIMATION
 // ==============================
 
 const mikeButton = document.querySelector('.text-size-small.profile_button');
@@ -448,8 +448,21 @@ mikeButton.addEventListener('mouseleave', () => {
   );
 });
 
+// ==============================
+// ? STAKES ANIMATION
+// ==============================
+
 // Function to apply floating animation while hovered, alternating Y direction
 function applyFloatingEffect(elements) {
+  if (window.innerWidth < 767) {
+    elements.forEach(element => {
+      if (element.floatingAnimation) {
+        element.floatingAnimation.cancel(); // Stop any existing floating animation
+        element.floatingAnimation = null;
+      }
+    });
+    return;
+  }
   elements.forEach((element, index) => {
     // Alternate the Y direction based on whether the index is even or odd
     const translateYValues = index % 2 === 0 ? ['0%', '-12%', '0%'] : ['0%', '12%', '0%'];
@@ -475,6 +488,13 @@ function stopFloatingEffect(elements) {
 // Function to apply hover animations (handles both enter, leave, and floating)
 function applyHoverAnimations(card, floatingElements, textElement, iconElement, hoverStyles) {
   card.addEventListener('mouseenter', () => {
+    if (window.innerWidth < 767) {
+      // Apply only color and border animations for smaller screens
+      animate(card, { borderColor: '#9B4A44' }, { duration: 0.2, easing: 'ease-out' });
+      animate(textElement, { color: '#9B4A44' }, { duration: 0.2, easing: 'ease-out' });
+      animate(iconElement, { stroke: '#9B4A44' }, { duration: 0.2, easing: 'ease-out' });
+      return;
+    }
     // Apply the hover "enter" animations
     floatingElements.forEach((element, index) => {
       const enterTransform = hoverStyles[index]?.enter || {};
@@ -620,4 +640,55 @@ toggleButton?.addEventListener('click', toggleNavbar);
 navbarButtonWrapper?.addEventListener('click', toggleNavbar);
 navbarLinkWrapper.forEach(link => {
   link.addEventListener('click', toggleNavbar);
+});
+
+// ==============================
+// FORM SUBMISSION EVENT LISTENER
+// ==============================
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Listen for the form submission event
+  const formSection = document.querySelector('.section_form');
+  const form = document.querySelector('.form');
+  const successMessage = document.querySelector('.w-form-done');
+  const heading = document.querySelector(
+    '.header_component-form > .max-width-small > .margin-bottom > *'
+  ); // Replace with your actual heading selector
+  const paragraph = document.querySelector(
+    '.header_component-form > .max-width-small > .margin-bottom > div'
+  ); // Replace with your actual paragraph selector
+
+  if (form && successMessage) {
+    // Create a MutationObserver to watch for changes in the success message element
+    const observer = new MutationObserver(function (mutationsList) {
+      for (const mutation of mutationsList) {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'style' &&
+          window.getComputedStyle(successMessage).display !== 'none'
+        ) {
+          // Scroll to the form section smoothly
+          formSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+
+          // Change heading and paragraph text upon successful submission
+          if (heading) {
+            heading.innerText = 'Success! Check out this 2-minute video'; // New heading text
+          }
+
+          if (paragraph) {
+            paragraph.innerText = `It offers a quick preview of what's ahead`; // New paragraph text
+          }
+
+          // Stop observing once the success message is visible
+          observer.disconnect();
+        }
+      }
+    });
+
+    // Start observing the success message element for changes in attributes
+    observer.observe(successMessage, { attributes: true });
+  }
 });
