@@ -420,32 +420,39 @@ document.body.addEventListener('click', handlePricingButtonClick);
 // ? PROFILE ANIMATION
 // ==============================
 
+const mikePlan = document.querySelector('.text-size-large.profile_button');
 const mikeButton = document.querySelector('.text-size-small.profile_button');
-const mikeProfile = document.querySelector('.profile-container');
+const mikeProfile = document.querySelectorAll('.profile-container');
 
-mikeButton.addEventListener('mouseenter', () => {
-  animate(
-    mikeProfile,
-    {
-      opacity: [0, 1],
-      top: ['200%', '0%'],
-      transform: [
-        'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(0deg)',
-        'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(-15deg)',
-        'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(4deg)',
-        'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(0deg)',
-      ],
-    },
-    { duration: 0.3, easing: 'ease-out' }
-  );
-});
+[mikeButton, mikePlan].forEach(button => {
+  button.addEventListener('mouseenter', () => {
+    mikeProfile.forEach(profile => {
+      animate(
+        profile,
+        {
+          opacity: [0, 1],
+          top: ['200%', '0%'],
+          transform: [
+            'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(0deg)',
+            'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(-15deg)',
+            'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(4deg)',
+            'translateX(-50%) translateY(calc(-100% - 0.25rem)) rotateZ(0deg)',
+          ],
+        },
+        { duration: 0.3, easing: 'ease-out' }
+      );
+    });
+  });
 
-mikeButton.addEventListener('mouseleave', () => {
-  animate(
-    mikeProfile,
-    { opacity: [1, 0], top: ['0%', '100%'] },
-    { duration: 0.2, easing: 'ease-in' }
-  );
+  button.addEventListener('mouseleave', () => {
+    mikeProfile.forEach(profile => {
+      animate(
+        profile,
+        { opacity: [1, 0], top: ['0%', '100%'] },
+        { duration: 0.2, easing: 'ease-in' }
+      );
+    });
+  });
 });
 
 // ==============================

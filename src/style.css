@@ -1320,10 +1320,6 @@ html {
 /* ? MIKE PROFILE */
 /* ============================== */
 
-.text-size-small.profile_button {
-  cursor: pointer;
-}
-
 .profile-container {
   opacity: 0;
   pointer-events: none;
