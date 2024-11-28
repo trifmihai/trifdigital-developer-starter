@@ -1151,13 +1151,13 @@ html {
 
 .swiper-container {
   box-sizing: border-box; /* Ensure margins don't cause overflow */
-  max-width: 76.5rem;
+  max-width: 50.5rem;
   height: 100%;
 }
 
 .swiper-wrapper {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   column-gap: 1.5rem;
 }
