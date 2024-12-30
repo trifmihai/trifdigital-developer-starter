@@ -87,8 +87,10 @@
   }
 }
 
-@media (max-width: 1440px) {
-  .plan_grid-v2 > .plan-lines_center > .plan-lines_center-line:nth-child(2n) {
+@media (max-width: 1600px) {
+  .plan_grid-v2 > .plan-lines_center > .plan-lines_center-line:nth-child(1),
+  .plan_grid-v2 > .plan-lines_center > .plan-lines_center-line:nth-child(2),
+  .plan_grid-v2 > .plan-lines_center > .plan-lines_center-line:nth-child(3) {
     display: none;
   }
 }
@@ -253,7 +255,7 @@ body.no-scroll {
     display: none;
   }
 
-  .section_hero > .padding-global > .container-large.projects {
+  .section_hero > .padding-global > .container-large.projects-copy {
     display: none;
   }
 
