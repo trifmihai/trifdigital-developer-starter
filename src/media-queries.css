@@ -205,7 +205,7 @@ body.no-scroll {
   }
 
   .hamburger-line.is-top.is-active {
-    transform: translateY(10px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
   }
 
   .hamburger-line.is-bottom.is-active {
